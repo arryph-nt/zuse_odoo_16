@@ -1,23 +1,53 @@
-odoo.define('clear_button_fun.pos_view',function(require){
-"use strict";
+odoo.define('pos_custom_buttons.DemoButton', function(require) {
+'use strict';
+   const { Gui } = require('point_of_sale.Gui');
+   const PosComponent = require('point_of_sale.PosComponent');
+   const { posbus } = require('point_of_sale.utils');
+   const ProductScreen = require('point_of_sale.ProductScreen');
+   const { useListener } = require('web.custom_hooks');
+   const Registries = require('point_of_sale.Registries');
+   const PaymentScreen = require('point_of_sale.PaymentScreen');
+   class CustomDemoButtons extends PosComponent {
 
-var screens = require('point_of_sale.screens');
-var gui = require('point_of_sale.gui');
-var core = require('web.core');
+constructor() {
 
-var ClearCartLine = screens.ActionButtonWidget.extend({
-    template: "ClearCartLine",
+super(...arguments);
 
-    button_click: function(){
-    var self = this;
-    this.clear_button_fun();
-    },
+useListener('click', this.onClick);
 
-    clear_button_fun(){
-    var order = this.pos.get_order();
-    order.remove_orderline(order.get_selected_orderline())
-    },
+}
+
+is_available() {
+
+const order = this.env.pos.get_order();
+
+return order
+
+}
+
+onClick() {
+
+Gui.showPopup("ErrorPopup", {
+
+title: this.env._t('Payment Screen Custom Button Clicked'),
+
+body: this.env._t('Welcome to OWL'),
+
 });
-screens.define_action_button({'name': 'clear_button_fun','widget': ClearCartLine,});
 
+}
+   }
+   CustomDemoButtons.template = 'CustomDemoButtons';
+   ProductScreen.addControlButton({
+
+component: CustomDemoButtons,
+
+condition: function() {
+
+return this.env.pos;
+
+},
+   });
+   Registries.Component.add(CustomDemoButtons);
+   return CustomDemoButtons;
 });

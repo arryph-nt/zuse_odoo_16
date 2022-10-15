@@ -26,7 +26,10 @@
     "depends": [
         "point_of_sale"
     ],
-
+    'assets': {
+            'web.assets_backend':   ['zuse_kds/static/src/js/pos_config.js'],
+            'web.assets_qweb': ['zuse_kds/static/src/xml/pos_config.xml']
+    },
     # always loaded
     'data': [
     ],
