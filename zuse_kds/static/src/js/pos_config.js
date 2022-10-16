@@ -19,7 +19,7 @@ useListener('click', this.onClick);
 
 is_available() {
 
-   const order = this.env.pos.get_order().name;
+   const order = this.env.pos.get_order();
 
    return order
 
@@ -31,7 +31,7 @@ onClick() {
 
    title: this.env._t('Payment Screen Custom Button Clicked'),
 
-   body: this.env._t('Welcome to OWL, ' + this.env.pos.get_order().component.search),
+   body: this.env._t('Welcome to OWL, ' + this.env.pos.get_order().name),
 
    });
 
