@@ -18,15 +18,14 @@ useListener('click', this.onClick);
 }
 
 is_available() {
-
-   const order = this.env.pos.get_order();
-
-   return order
-
+   return this.env.pos.get_order();
 }
 
 onClick() {
-
+    const order = this.is_available();
+    for (var lines in order.get_orderlines()){
+         console.log(lines);
+    }
    Gui.showPopup("ErrorPopup", {
 
    title: this.env._t('Payment Screen Custom Button Clicked'),
