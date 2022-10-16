@@ -11,7 +11,7 @@ odoo.define('pos_custom_buttons.DemoButton', function(require) {
 
 constructor() {
 
-super(...arguments);
+// super(...arguments);
 
 useListener('click', this.onClick);
 
