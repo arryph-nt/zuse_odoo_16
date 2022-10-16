@@ -19,21 +19,21 @@ useListener('click', this.onClick);
 
 is_available() {
 
-const order = this.env.pos.get_order();
+   const order = this.env.pos.get_order();
 
-return order
+   return order
 
 }
 
 onClick() {
 
-Gui.showPopup("ErrorPopup", {
+   Gui.showPopup("ErrorPopup", {
 
-title: this.env._t('Payment Screen Custom Button Clicked'),
+   title: this.env._t('Payment Screen Custom Button Clicked'),
+   
+   body: this.env._t('Welcome to OWL' + this.is_available().amount),
 
-body: this.env._t('Welcome to OWL'),
-
-});
+   });
 
 }
    }
